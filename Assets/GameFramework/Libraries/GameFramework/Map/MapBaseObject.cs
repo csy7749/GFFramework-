@@ -50,9 +50,23 @@ namespace GameFramework.Map
                 get { return m_MapBaseObjectHelper; }
             }
 
-            public void CreatMap()
+            public void CreatMap(Vector2 vector2,ITileAgentHelper tileAgentHelper)
             {
-                throw new System.NotImplementedException();
+                if (vector2 == null)
+                {
+                    throw new GameFrameworkException("CreatMap vector2 null.");
+                }
+                if (tileAgentHelper == null)
+                {
+                    throw new GameFrameworkException("CreatMap tileAgentHelper null.");
+                }
+                if (m_Tiles.ContainsKey(vector2))
+                {
+                    return;
+                }
+                TileAgent tileAgent = new TileAgent(this, tileAgentHelper);
+                tileAgent.V2 = vector2;
+                m_Tiles.Add(vector2 , tileAgent);
             }
 
             public void DestroyMap()

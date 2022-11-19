@@ -20,9 +20,11 @@ namespace UnityGameFramework.Runtime
         [SerializeField]
         private string m_MapObjectHelperTypeName = "UnityGameFramework.Runtime.MapObjectHelper";
         [SerializeField]
+        private string m_TileAgentHelperTypeName = "UnityGameFramework.Runtime.TileAgentHelper";
+        [SerializeField]
         private MapBaseObjectHelper m_CustomMapObjectHelper = null;
         [SerializeField]
-        private MapBaseObjectHelper m_CustomTileAgentHelper = null;
+        private TileAgentHelper m_CustomTileAgentHelper = null;
 
 
         public int MapObjectCount
@@ -104,9 +106,20 @@ namespace UnityGameFramework.Runtime
             m_MapManager.CreatMapObject(mapObjectName, mapBaseObjectHelper);
         }
 
-        private void CreatTileAgent(string tileAgentName, MapBaseObjectHelper mapBaseObjectHelper)
+        /// <summary>
+        /// Ìí¼ÓµØÍ¼¿é
+        /// </summary>
+        /// <param name="mapObjectName"></param>
+        /// <param name="vector2"></param>
+        private void CreatTileAgent(string mapObjectName,Vector2 vector2)
         {
-
+            if (string.IsNullOrEmpty(mapObjectName))
+            {
+                Log.Error("Can not mapObjectName.");
+                return;
+            }
+            TileAgentHelper tileAgentHelper = Helper.CreateHelper(m_TileAgentHelperTypeName, m_CustomTileAgentHelper);
+            m_MapManager.CreatTileAgent(mapObjectName, vector2, tileAgentHelper);
         }
     }
 }

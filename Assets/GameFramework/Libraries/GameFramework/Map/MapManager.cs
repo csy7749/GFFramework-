@@ -115,6 +115,20 @@ namespace GameFramework.Map
             m_Maps.Add(mapObjectName, mapBaseObject);
         }
 
+        public void CreatTileAgent(string mapObjectName,Vector2 vector2, ITileAgentHelper tileAgentHelper)
+        {
+            if (string.IsNullOrEmpty(mapObjectName))
+            {
+                throw new GameFrameworkException("tileAgentName is invalid.");
+            }
+            MapBaseObject mapBaseObject = (MapBaseObject)GetMapObject(mapObjectName);
+            if (mapBaseObject == null)
+            {
+                throw new GameFrameworkException("mapBaseObject is invalid.");
+            }
+            mapBaseObject.CreatMap(vector2, tileAgentHelper);
+        }
+
         public void RemoveMap()
         {
             throw new System.NotImplementedException();

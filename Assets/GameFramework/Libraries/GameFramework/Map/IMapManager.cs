@@ -48,6 +48,11 @@ namespace GameFramework.Map
         void CreatMapObject(string mapObjectName, IMapBaseObjectHelper mapBaseObjectHelper);
 
         /// <summary>
+        /// 生成地图块
+        /// </summary>
+        void CreatTileAgent(string mapObjectName, Vector2 vector2, ITileAgentHelper mapBaseObjectHelper);
+
+        /// <summary>
         /// 销毁地图
         /// </summary>
         void RemoveMap();

@@ -32,7 +32,7 @@ namespace GameFramework.Map
         /// <summary>
         /// 生成地图
         /// </summary>
-        void CreatMap();
+        void CreatMap(Vector2 vector2, ITileAgentHelper tileAgentHelper);
 
         /// <summary>
         /// 删除地图

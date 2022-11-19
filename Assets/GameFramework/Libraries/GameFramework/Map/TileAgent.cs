@@ -10,10 +10,11 @@ namespace GameFramework.Map
         /// <summary>
         /// µØÍ¼¿é»ùÀà
         /// </summary>
-        public abstract class TileAgent : IReference, ITileAgent
+        public sealed class TileAgent : IReference, ITileAgent
         {
             private readonly MapBaseObject m_MapObject;
             private readonly ITileAgentHelper m_TileAgentHelper;
+            private Vector2 m_V2;
             private int m_Serialid;
             private object m_TileAsset;
 
@@ -38,6 +39,11 @@ namespace GameFramework.Map
             public IMapBaseObject mapBaseObject 
             {
                 get { return m_MapObject; }
+            }
+
+            public Vector2 V2
+            {   set { m_V2 = value; }
+                get { return m_V2; }
             }
 
             /// <summary>
