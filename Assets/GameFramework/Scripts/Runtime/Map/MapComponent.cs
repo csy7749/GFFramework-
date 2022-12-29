@@ -1,26 +1,21 @@
 using GameFramework;
 using GameFramework.Map;
 using GameFramework.Resource;
-using GameFramework.Sound;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
+using GameFramework.Setting;
 
 namespace UnityGameFramework.Runtime
 {
     /// <summary>
-    /// µØÍ¼×é¼ş¡£
+    /// åœ°å›¾ç»„ä»¶ã€‚
     /// </summary>
     [DisallowMultipleComponent]
     [AddComponentMenu("Game Framework/Map")]
     public sealed partial class MapComponent : GameFrameworkComponent
     {
         private IMapManager m_MapManager = null;
-        [SerializeField]
-        private string m_MapObjectHelperTypeName = "UnityGameFramework.Runtime.MapObjectHelper";
-        [SerializeField]
-        private string m_TileAgentHelperTypeName = "UnityGameFramework.Runtime.TileAgentHelper";
         [SerializeField]
         private MapBaseObjectHelper m_CustomMapObjectHelper = null;
         [SerializeField]
@@ -54,12 +49,13 @@ namespace UnityGameFramework.Runtime
             {
                 m_MapManager.SetResourceManager(GameFrameworkEntry.GetModule<IResourceManager>());
             }
+            CreatMapObject("Test");
         }
 
         /// <summary>
-        /// ÊÇ·ñ´æÔÚÖ¸¶¨µØÍ¼¡£
+        /// æ˜¯å¦å­˜åœ¨æŒ‡å®šåœ°å›¾ã€‚
         /// </summary>
-        /// <param name="mapObjectName">µØÍ¼Ãû×Ö</param>
+        /// <param name="mapObjectName">åœ°å›¾åå­—</param>
         /// <returns></returns>
         public bool HasMapObject(string mapObjectName)
         {
@@ -67,9 +63,9 @@ namespace UnityGameFramework.Runtime
         }
 
         /// <summary>
-        /// »ñÈ¡Ö¸¶¨µØÍ¼×é¡£
+        /// è·å–æŒ‡å®šåœ°å›¾ç»„ã€‚
         /// </summary>
-        /// <param name="mapObjectName">µØÍ¼Ãû×Ö</param>
+        /// <param name="mapObjectName">åœ°å›¾åå­—</param>
         /// <returns></returns>
         public IMapBaseObject GetMapObject(string mapObjectName)
         {
@@ -77,16 +73,16 @@ namespace UnityGameFramework.Runtime
         }
 
         /// <summary>
-        /// »ñÈ¡ËùÓĞµØÍ¼×é¡£
+        /// è·å–æ‰€æœ‰åœ°å›¾ç»„ã€‚
         /// </summary>
-        /// <returns>ËùÓĞµØÍ¼×é¡£</returns>
+        /// <returns>æ‰€æœ‰åœ°å›¾ç»„ã€‚</returns>
         public IMapBaseObject[] GetMapObjects()
         {
             return m_MapManager.GetMapObjects();
         }
 
         /// <summary>
-        /// Ìí¼ÓµØÍ¼
+        /// æ·»åŠ åœ°å›¾
         /// </summary>
         /// <param name="mapObjectName"></param>
         /// <param name="mapBaseObjectHelper"></param>
@@ -97,17 +93,21 @@ namespace UnityGameFramework.Runtime
             {
                 return;
             }
-            MapBaseObjectHelper mapBaseObjectHelper = Helper.CreateHelper(m_MapObjectHelperTypeName,m_CustomMapObjectHelper);
+            MapBaseObjectHelper mapBaseObjectHelper = Helper.CreateHelper("UnityGameFramework.Runtime.MapBaseObjectHelper", m_CustomMapObjectHelper);
             if (mapBaseObjectHelper == null)
             {
                 Log.Error("Can not create mapBaseObjectHelper.");
                 return;
             }
             m_MapManager.CreatMapObject(mapObjectName, mapBaseObjectHelper);
+            mapBaseObjectHelper.name = mapObjectName;
+            Transform transform = mapBaseObjectHelper.transform;
+            transform.SetParent(this.transform);
+            transform.localScale = Vector3.one;
         }
 
         /// <summary>
-        /// Ìí¼ÓµØÍ¼¿é
+        /// æ·»åŠ åœ°å›¾å—
         /// </summary>
         /// <param name="mapObjectName"></param>
         /// <param name="vector2"></param>
@@ -118,7 +118,7 @@ namespace UnityGameFramework.Runtime
                 Log.Error("Can not mapObjectName.");
                 return;
             }
-            TileAgentHelper tileAgentHelper = Helper.CreateHelper(m_TileAgentHelperTypeName, m_CustomTileAgentHelper);
+            TileAgentHelper tileAgentHelper = Helper.CreateHelper("TileAgentHelper", m_CustomTileAgentHelper);
             m_MapManager.CreatTileAgent(mapObjectName, vector2, tileAgentHelper);
         }
     }

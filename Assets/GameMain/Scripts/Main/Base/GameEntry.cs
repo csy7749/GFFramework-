@@ -118,6 +118,11 @@ namespace Game
         /// </summary>
         public static LubanTableComponent LubanTable { get; private set; }
 
+        /// <summary>
+        /// 获取地图组件。
+        /// </summary>
+        public static MapComponent Map { get; private set; }
+
         private void Start()
         {
             Base = UnityGameFramework.Runtime.GameEntry.GetComponent<BaseComponent>();
@@ -142,6 +147,7 @@ namespace Game
             WebRequest = UnityGameFramework.Runtime.GameEntry.GetComponent<WebRequestComponent>();
             BuiltinData = UnityGameFramework.Runtime.GameEntry.GetComponent<BuiltinDataComponent>();
             LubanTable = UnityGameFramework.Runtime.GameEntry.GetComponent<LubanTableComponent>();
+            Map = UnityGameFramework.Runtime.GameEntry.GetComponent<MapComponent>();
         }
     }
 }

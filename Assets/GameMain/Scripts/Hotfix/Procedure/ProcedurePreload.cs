@@ -80,8 +80,8 @@ namespace Game.Hotfix
                     return;
                 }
             }
-
-            procedureOwner.SetData<VarInt32>("NextSceneId", GameEntry.Config.GetInt("Scene.Menu"));
+            var nextSceneId = GameEntry.Config.GetInt("Scene.Main");
+            procedureOwner.SetData<VarInt32>("NextSceneId", nextSceneId);
             ChangeState<ProcedureChangeScene>(procedureOwner);
         }
 

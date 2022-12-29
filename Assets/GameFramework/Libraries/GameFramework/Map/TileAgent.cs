@@ -66,7 +66,7 @@ namespace GameFramework.Map
             /// <summary>
             /// 清理引用。
             /// </summary>
-            public abstract void Clear();
+            public void Clear() { }
         }
     }
 

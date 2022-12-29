@@ -381,6 +381,9 @@ namespace RoguelikeGeneratorPro
 
         #region Generation
 
+        /// <summary>
+        /// 生成关卡
+        /// </summary>
         public void RigenenerateLevel()
         {
             Clear();

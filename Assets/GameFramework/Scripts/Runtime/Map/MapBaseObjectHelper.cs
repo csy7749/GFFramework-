@@ -5,9 +5,12 @@ using UnityEngine;
 
 namespace UnityGameFramework.Runtime
 {
-    public abstract class MapBaseObjectHelper : MonoBehaviour, IMapBaseObjectHelper
+    /// <summary>
+    /// 地图自动生成基类
+    /// </summary>
+    public class MapBaseObjectHelper : MonoBehaviour, IMapBaseObjectHelper
     {
-
+        public string Name = "地图";
     }
 }
 
